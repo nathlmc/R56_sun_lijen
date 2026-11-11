@@ -47,6 +47,9 @@
  SLJ_reach_out_to_the_liberals_desc:0 "Promise moderates a constitution once the nation is secure."
  SLJ_promote_the_war_hero:0 "Promote the War Hero"
  SLJ_promote_the_war_hero_desc:0 "Make Sun Li-jen's name known in every province."
+ SLJ_decision_cost_CP_15:0 "£command_power  §Y15§!"
+ SLJ_sway_the_mps:0 "Sway the Military Police"
+ SLJ_sway_the_mps_desc:0 "Attempt to sway the ROCMP to our side."
 
  ### Tooltips ###
  SLJ_unlocks_officer_corps_decisions_tt:0 "Unlocks the §YOfficer Corps§! decision category."
@@ -78,3 +81,9 @@
  slj.6.t:0 "Washington Declines"
  slj.6.d:0 "The Americans have politely declined our request. We will have to adapt their manuals on our own."
  slj.6.a:0 "We will manage."
+ slj.7.t:0 "Rumors of conspiracy with the Military Police"
+ slj.7.d:0 "Rumors are spreading of secret meetings between Sun and the Military Police. Known for their \"Chung Chen Chün Feng\", it is hard to imagine these units turning on the Generalissimo, whose regime they are sworn to protect."
+ slj.7.a:0 "We'll try again"
+ slj.8.t:0 "A Secret Channel"
+ slj.8.d:0 "A secret backchannel has been established between Sun and the Military Police. Despite being known for their \"Chung Chen Chün Feng\", it seems that trust has been established between Sun and Military Police high command."
+ slj.8.a:0 "We have gained supporters"

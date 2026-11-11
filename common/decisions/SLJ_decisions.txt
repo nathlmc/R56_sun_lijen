@@ -32,4 +32,44 @@ SLJ_officer_corps_category = {
 		}
 		ai_will_do = { factor = 1 }
 	}
+
+	SLJ_sway_the_mps = {
+		icon = generic_political_discourse
+		cost = 30                  # TODO: political power cost
+		custom_cost_trigger = {
+			command_power > 14.99
+		}
+		custom_cost_text = decision_cost_CP_15
+		days_remove = 15
+
+		visible = {
+			has_country_flag = SLJ_path
+			NOT = { has_country_flag = SLJ_regime_established }
+		}
+		available = {
+			has_country_flag = SLJ_path
+			NOT = { has_country_flag = SLJ_regime_established }
+			NOT = { has_country_flag = SLJ_mps_support}
+		}
+
+		# Runs when the mission ends
+		remove_effect = {
+			random_list = {
+				30 = {
+					modifier = { add = 30 has_country_flag = SLJ_war_hero }
+					set_country_flag = SLJ_mps_support
+					country_event = { id = slj.8 }
+				}
+				70 = {
+					modifier = { add = -30 has_country_flag = SLJ_war_hero }
+					country_event = { id = slj.7 }
+				}
+			}
+		}
+		complete_effect = {
+			add_command_power = -15
+		}
+		days_re_enable = 60
+		ai_will_do = { factor = 0 }
+	}
 }

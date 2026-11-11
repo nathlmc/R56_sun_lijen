@@ -90,3 +90,26 @@ country_event = {
 		army_experience = 15
 	}
 }
+
+country_event = {
+	id = slj.7
+	title = slj.7.t
+	desc = slj.7.d
+	is_triggered_only = yes
+	option = {
+		name = slj.7.a
+		add_stability = -0.05
+	}
+}
+
+country_event = {
+	id = slj.8 # The MP will side with Sun when time comes
+	title = slj.8.t
+	desc = slj.8.d
+	is_triggered_only = yes
+	option = {
+		name = slj.8.a
+		add_stability = 0.05
+		add_war_support = 0.05
+	}
+}
