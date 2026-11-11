@@ -50,13 +50,26 @@ SLJ_coup_effect = {
 	CHI_sun_li_jen = { set_character_flag = SLJ_loyal_to_sun }
 	remove_unit_leader_role = { character = CHI_sun_li_jen }
 
-	start_civil_war = {
-		ideology = fascism
-		size = 0.65			# loyalists get ~65%, Sun keeps ~35% (harder start)
-		keep_unit_leaders_trigger = { has_character_flag = SLJ_loyal_to_sun }
-		# Optional - pin the split. Get state IDs in-game with the debug tooltip:
-		# capital = 000		# loyalist capital (e.g. a Sichuan state)
-		# states = { 000 000 000 }	# states that go to the loyalists
+	if = {
+		limit = { check_variable = { SLJ_branches_won > 2 } }   # all three: clean coup
+		# no start_civil_war
+		country_event = { id = slj.13 }
+	}
+	else_if = {
+		limit = { check_variable = { SLJ_branches_won > 1 } }   # two: smaller breakaway
+		start_civil_war = {
+			ideology = fascism
+			size = 0.35
+			# TODO: navy_ratio / air_ratio based on which branches you won
+		}
+		country_event = { id = slj.3 }
+	}
+	else = {                                                       # one or none: today's version
+		start_civil_war = {
+			ideology = fascism
+			size = 0.65
+		}
+		country_event = { id = slj.3 }
 	}
 
 	# Sun is a general again (R56's traits; skill as after 'A Hero of the Nation')
@@ -130,5 +143,4 @@ SLJ_coup_effect = {
 		create_unit = { division = "name = \"Chiao-tao-tui\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.5 start_equipment_factor = 1.0" owner = ROOT }
 	}
 	add_war_support = 0.10
-	country_event = { id = slj.3 }
 }

@@ -39,6 +39,19 @@ country_event = {
 	option = { name = slj.3.a }
 }
 
+# The end of the Generalissimo's rule if enough branches side with Sun
+country_event = {
+	id = slj.13
+	title = slj.13.t
+	desc = slj.13.d
+	is_triggered_only = yes
+	option = 
+	{ 
+		name = slj.13.a 
+		retire_character = CHI_chiang_kaishek
+	}
+}
+
 # USA: China requests military advisors (FROM = China)
 country_event = {
 	id = slj.4
@@ -91,7 +104,7 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = {	# MPs reject
 	id = slj.7
 	title = slj.7.t
 	desc = slj.7.d
@@ -102,7 +115,7 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = {	# MPs accept
 	id = slj.8 # The MP will side with Sun when time comes
 	title = slj.8.t
 	desc = slj.8.d
@@ -112,4 +125,50 @@ country_event = {
 		add_stability = 0.05
 		add_war_support = 0.05
 	}
+}
+
+country_event = {	# Air Force reject
+	id = slj.9 
+	title = slj.9.t
+	desc = slj.9.d
+	is_triggered_only = yes
+	option = {
+		name = slj.9.a
+		add_stability = -0.05
+		}
+}
+
+country_event = {	# Air Force accept
+	id = slj.10 # The Air Force will side with Sun when time comes
+	title = slj.10.t
+	desc = slj.10.d
+	is_triggered_only = yes
+	option = {
+		name = slj.10.a
+		add_stability = 0.05
+		add_war_support = 0.05
+		}
+}
+
+country_event = {	# Navy reject
+	id = slj.11
+	title = slj.11.t
+	desc = slj.11.d
+	is_triggered_only = yes
+	option = {
+		name = slj.11.a
+		add_stability = -0.05
+		}
+}
+
+country_event = {	# Navy accept
+	id = slj.12 # The Navy will side with Sun when time comes
+	title = slj.12.t
+	desc = slj.12.d
+	is_triggered_only = yes
+	option = {
+		name = slj.12.a
+		add_stability = 0.05
+		add_war_support = 0.05
+		}
 }
