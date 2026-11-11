@@ -1,0 +1,225 @@
+### Source of the Sun Li-jen focuses. patch_r56_tree.py pastes these into R56's tree.
+### Edit HERE, then rerun the patch script.
+
+	focus = {
+		id = SLJ_the_officers_memorandum
+		icon = GFX_focus_CHI_military_affairs_commission
+		prerequisite = { focus = KMT_empower_the_secret_police }
+		mutually_exclusive = { focus = KMT_gut_the_deep_state_new focus = KMT_china_at_the_mercy_of_the_cc_clique focus = KMT_expand_dais_apparatus}
+		relative_position_id = KMT_empower_the_secret_police
+		x = -5
+		y = 2
+		cost = 10
+		allow_branch = {
+			NOT = { has_country_flag = KMT_taiwan }
+			NOT = { has_country_flag = KMT_fascism }
+		}
+		available = {
+			hidden_trigger = {
+				NOT = { has_country_flag = KMT_fascism }
+				NOT = { has_country_flag = KMT_taiwan }
+			}
+			has_country_leader = {
+				character = CHI_chiang_kaishek
+				ruling_only = yes
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ARMY_XP }
+		ai_will_do = { factor = 0 } # alt-history: AI keeps to Chiang's path
+		completion_reward = {
+			set_country_flag = SLJ_path	# Sun is already recruited by R56's history file
+			add_ideas = SLJ_officers_disquiet
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SLJ_unlocks_officer_corps_decisions_tt
+			country_event = { id = slj.1 }
+		}
+	}
+	
+	### POLITICAL LINE ###
+	focus = {
+		id = SLJ_court_the_moderates
+		icon = GFX_focus_generic_social_democracy
+		prerequisite = { focus = SLJ_the_officers_memorandum }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -3
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			add_popularity = { ideology = democratic popularity = 0.05 }
+			add_popularity = { ideology = fascism popularity = -0.03 }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SLJ_unlocks_liberals_decision_tt
+		}
+	}
+	
+	focus = {
+		id = SLJ_a_hero_of_the_nation
+		icon = GFX_focus_CHI_demonstrate_our_resolve
+		prerequisite = { focus = SLJ_court_the_moderates }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -3
+		y = 2
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MILITARY_CHARACTER }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			add_war_support = 0.03
+			CHI_sun_li_jen = { add_skill_level = 1 }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = SLJ_unlocks_war_hero_decision_tt
+		}
+	}
+	
+	### MILITARY LINE ###
+	focus = {
+		id = SLJ_the_tax_police_model
+		icon = GFX_focus_CHI_formalise_training_regime
+		prerequisite = { focus = SLJ_the_officers_memorandum }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			add_ideas = SLJ_professional_army_1
+			army_experience = 15
+		}
+	}
+	
+	focus = {
+		id = SLJ_american_methods
+		icon = GFX_focus_CHI_military_mission
+		prerequisite = { focus = SLJ_the_tax_police_model }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -1
+		y = 2
+		cost = 7
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_RESEARCH }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			army_experience = 10
+			if = {
+				limit = { country_exists = USA }
+				custom_effect_tooltip = SLJ_ask_usa_for_advisors_tt
+				hidden_effect = { USA = { country_event = { id = slj.4 days = 1 } } }
+			}
+			else = {
+				army_experience = 25
+			}
+		}
+	}
+	
+	### THE CHOICE: PEACEFUL RISE OR COUP ###
+	focus = {
+		id = SLJ_the_generalissimo_steps_aside
+		icon = GFX_focus_CHI_change_in_leadership
+		prerequisite = { focus = SLJ_a_hero_of_the_nation }
+		prerequisite = { focus = SLJ_american_methods }
+		mutually_exclusive = { focus = SLJ_the_nanking_coup }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -4
+		y = 3
+		cost = 10
+		available = {
+			SLJ_peaceful_transition_possible = yes
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_POLITICAL_CHARACTER }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			SLJ_peaceful_transition_effect = yes
+		}
+	}
+	
+	focus = {
+		id = SLJ_the_nanking_coup
+		icon = GFX_focus_AUS_raid_military_storages
+		prerequisite = { focus = SLJ_a_hero_of_the_nation }
+		prerequisite = { focus = SLJ_american_methods }
+		mutually_exclusive = { focus = SLJ_the_generalissimo_steps_aside }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -2
+		y = 3
+		cost = 5
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SLJ_no_foreign_war_tt
+				NOT = {
+				any_enemy_country = {
+					NOT = { is_literally_china = yes }
+					is_major = yes
+					}
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_POLITICAL_CHARACTER FOCUS_FILTER_ARMY_XP }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			custom_effect_tooltip = SLJ_coup_warning_tt
+			custom_effect_tooltip = generic_skip_one_line_tt
+			SLJ_coup_effect = yes
+		}
+	}
+	
+	### THE NEW REGIME ###
+	focus = {
+		id = SLJ_the_new_army
+		icon = GFX_focus_chi_army_reform
+		prerequisite = { focus = SLJ_the_generalissimo_steps_aside focus = SLJ_the_nanking_coup }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -3
+		y = 4
+		cost = 10
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_MANPOWER }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			if = {
+				limit = { has_country_flag = SLJ_took_power_by_coup }
+				swap_ideas = { remove_idea = SLJ_professional_army_1 add_idea = SLJ_professional_army_3 }
+			}
+			else = {
+				swap_ideas = { remove_idea = SLJ_professional_army_1 add_idea = SLJ_professional_army_2 }
+			}
+		}
+	}
+	
+	focus = {
+		id = SLJ_special_service_units
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = SLJ_the_new_army }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -4
+		y = 5
+		cost = 7
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			add_ideas = SLJ_special_service_units_idea
+			army_experience = 25
+		}
+	}
+	
+	focus = {
+		id = SLJ_discipline_over_chaos
+		icon = GFX_focus_CHI_strengthening_our_resolve
+		prerequisite = { focus = SLJ_the_new_army }
+		relative_position_id = SLJ_the_officers_memorandum
+		x = -2
+		y = 5
+		cost = 10
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			add_stability = 0.10
+			add_war_support = 0.05
+			army_experience = 50
+			if = {
+				limit = { has_country_flag = SLJ_took_power_by_coup }
+				add_political_power = 100
+				add_command_power = 50
+			}
+		}
+	}
+

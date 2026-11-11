@@ -1,0 +1,17 @@
+### Sun Li-jen Path - scripted triggers
+### Tune the peaceful-transition thresholds here.
+### NOTE: R56's authoritarian route forces democratic support under 10%
+### (KMT_redefine_democracy), so the design doc's 40-50% would be unreachable.
+### 15% is reachable through SLJ_court_the_moderates + the liberals decision.
+
+SLJ_peaceful_transition_possible = {
+	democratic > 0.15
+	has_stability > 0.5
+	custom_trigger_tooltip = {
+		tooltip = SLJ_war_hero_condition_tt
+		OR = {
+			has_country_flag = SLJ_war_hero
+			CHI_sun_li_jen = { skill > 3 }	# verify in error.log; delete this line if it errors
+		}
+	}
+}

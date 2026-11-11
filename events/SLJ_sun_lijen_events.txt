@@ -1,0 +1,92 @@
+add_namespace = slj
+
+# The Officers' Memorandum (from the root focus)
+country_event = {
+	id = slj.1
+	title = slj.1.t
+	desc = slj.1.d
+	is_triggered_only = yes
+
+	option = { # Let them speak
+		name = slj.1.a
+		army_experience = 15
+		add_political_power = -25
+		ai_chance = { base = 50 }
+	}
+	option = { # Note the names
+		name = slj.1.b
+		add_political_power = 25
+		add_stability = -0.02
+		ai_chance = { base = 50 }
+	}
+}
+
+# Peaceful transition
+country_event = {
+	id = slj.2
+	title = slj.2.t
+	desc = slj.2.d
+	is_triggered_only = yes
+	option = { name = slj.2.a }
+}
+
+# The Nanking Coup
+country_event = {
+	id = slj.3
+	title = slj.3.t
+	desc = slj.3.d
+	is_triggered_only = yes
+	option = { name = slj.3.a }
+}
+
+# USA: China requests military advisors (FROM = China)
+country_event = {
+	id = slj.4
+	title = slj.4.t
+	desc = slj.4.d
+	is_triggered_only = yes
+
+	option = { # Send the advisors
+		name = slj.4.a
+		FROM = {
+			country_event = { id = slj.5 days = 2 } 
+			set_country_flag = SLJ_us_backing
+		}
+		ai_chance = { base = 75 }
+	}
+	option = { # Decline
+		name = slj.4.b
+		FROM = { country_event = { id = slj.6 days = 2 } }
+		ai_chance = { base = 25 }
+	}
+}
+
+# China: the Americans accept
+country_event = {
+	id = slj.5
+	title = slj.5.t
+	desc = slj.5.d
+	is_triggered_only = yes
+	option = {
+		name = slj.5.a
+		add_tech_bonus = {
+			name = SLJ_american_advisors
+			bonus = 0.5
+			uses = 1
+			category = infantry_weapons
+		}
+		army_experience = 25
+	}
+}
+
+# China: the Americans decline
+country_event = {
+	id = slj.6
+	title = slj.6.t
+	desc = slj.6.d
+	is_triggered_only = yes
+	option = {
+		name = slj.6.a
+		army_experience = 15
+	}
+}

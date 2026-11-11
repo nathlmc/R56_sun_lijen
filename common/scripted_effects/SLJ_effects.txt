@@ -1,0 +1,134 @@
+### Sun Li-jen Path - scripted effects
+
+# Shared by both outcomes: Sun takes over a military-led tutelage government.
+SLJ_install_sun_as_leader = {
+	set_politics = {
+		ruling_party = neutrality
+		elections_allowed = no
+	}
+	set_party_name = { ideology = neutrality long_name = SLJ_party_long name = SLJ_party }
+	add_country_leader_role = {
+		character = CHI_sun_li_jen
+		country_leader = {
+			expire = "1965.1.1"
+			ideology = the_peoples_tutelage	# R56 neutrality sub-ideology (also used for Wang Jingwei)
+			traits = { SLJ_the_soldiers_general }
+		}
+		promote_leader = yes
+	}
+	remove_ideas = SLJ_officers_disquiet
+	set_country_flag = SLJ_regime_established
+}
+
+# Peaceful rise: smooth transition, modest rewards.
+SLJ_peaceful_transition_effect = {
+	SLJ_install_sun_as_leader = yes
+	add_stability = 0.05
+	add_political_power = 50
+	country_event = { id = slj.2 }
+}
+
+# Coup: player stays as Sun's government; Chiang's loyalists break away as fascists.
+SLJ_coup_effect = {
+	set_country_flag = SLJ_took_power_by_coup
+
+	# Chiang becomes leader of the fascist faction, which the breakaway state inherits
+	add_country_leader_role = {
+		character = CHI_chiang_kaishek
+		country_leader = {
+			expire = "1965.1.1"
+			ideology = ultranationalism
+			traits = { army_connections }
+		}
+		promote_leader = yes	# replaces Dai Li as fascist party leader (fixed in v0.1.6)
+	}
+	SLJ_install_sun_as_leader = yes	# runs after, so Sun still ends up ruling
+
+	# Civil wars share generals out between both sides, and Sun (a general AND our new
+	# leader) went to the loyalists in testing. So: he stops being a general for the
+	# split, and gets the role back right after with his stats.
+	CHI_sun_li_jen = { set_character_flag = SLJ_loyal_to_sun }
+	remove_unit_leader_role = { character = CHI_sun_li_jen }
+
+	start_civil_war = {
+		ideology = fascism
+		size = 0.65			# loyalists get ~65%, Sun keeps ~35% (harder start)
+		keep_unit_leaders_trigger = { has_character_flag = SLJ_loyal_to_sun }
+		# Optional - pin the split. Get state IDs in-game with the debug tooltip:
+		# capital = 000		# loyalist capital (e.g. a Sichuan state)
+		# states = { 000 000 000 }	# states that go to the loyalists
+	}
+
+	# Sun is a general again (R56's traits; skill as after 'A Hero of the Nation')
+	add_corps_commander_role = {
+		character = CHI_sun_li_jen
+		traits = { career_officer brilliant_strategist war_hero }
+		skill = 5
+		attack_skill = 5
+		defense_skill = 2
+		planning_skill = 4
+		logistics_skill = 4
+	}
+
+	# Sun's elite core, spawned AFTER the split so it isn't divided
+	division_template = {
+		is_locked = yes
+		priority = 2
+		name = "Hsin-i Chün"
+		regiments = {
+			infantry = { x = 0 y = 0 }
+			infantry = { x = 0 y = 1 }
+			infantry = { x = 0 y = 2 }
+			infantry = { x = 1 y = 0 }
+			infantry = { x = 1 y = 1 }
+			infantry = { x = 1 y = 2 }
+			infantry = { x = 2 y = 0 }
+			infantry = { x = 2 y = 1 }
+			infantry = { x = 2 y = 2 }
+		}
+		support = {
+			engineer = { x = 0 y = 0 }
+			artillery = {x = 0 y = 1}
+			recon = { x = 0 y = 2 }
+		}
+	}
+	if = { limit = { has_country_flag = SLJ_us_backing } 
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 4500
+			producer = USA
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = 100
+			producer = USA
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment_1
+			amount = 60
+			producer = USA
+		}
+	}
+	else = {
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 4500
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = 100
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment_1
+			amount = 60
+		}
+	}
+	capital_scope = {
+		create_unit = { division = "name = \"Hsin-pien 30 Shih\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.8 start_equipment_factor = 1.0" owner = ROOT }
+		create_unit = { division = "name = \"Hsin-pien 38 Shih\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.8 start_equipment_factor = 1.0" owner = ROOT }
+		create_unit = { division = "name = \"50 Shih\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.7 start_equipment_factor = 1.0" owner = ROOT }
+		create_unit = { division = "name = \"Chiao-tao-tui\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.5 start_equipment_factor = 1.0" owner = ROOT }
+	}
+	add_war_support = 0.10
+	country_event = { id = slj.3 }
+}

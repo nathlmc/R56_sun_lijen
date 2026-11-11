@@ -1,0 +1,53 @@
+### Sun Li-jen Path - national spirits
+### No picture set yet: add  picture = <name>  to give each spirit an icon.
+ideas = {
+	country = {
+		SLJ_officers_disquiet = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				political_power_factor = -0.10
+				stability_factor = -0.03
+			}
+		}
+		SLJ_professional_army_1 = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				training_time_army_factor = -0.05
+				army_org_factor = 0.03
+			}
+		}
+		# Peaceful outcome
+		SLJ_professional_army_2 = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				conscription_factor = -0.10
+				army_org_factor = 0.08
+				experience_gain_army_factor = 0.10
+				training_time_army_factor = -0.10
+			}
+		}
+		# Coup outcome: harder start, stronger long-term
+		SLJ_professional_army_3 = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				conscription_factor = -0.15
+				army_org_factor = 0.12
+				experience_gain_army_factor = 0.20
+				training_time_army_factor = -0.15
+				army_attack_factor = 0.05
+			}
+		}
+		SLJ_special_service_units_idea = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				special_forces_cap = 0.05
+				army_morale_factor = 0.05
+			}
+		}
+	}
+}
