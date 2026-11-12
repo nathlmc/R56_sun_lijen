@@ -146,13 +146,13 @@ SLJ_coup_effect = {
 			amount = 10
 		}
 	}
-
-	if = { limit = { has_country_flag = SLJ_airforce_support }
-		add_equipment_to_stockpile = {
-			type = CAS_equipment_1
-			amount = 50
-		}
-	}
+	### Will have to work on this later. There seems to be problems adding CAS equipment
+	# if = { limit = { has_country_flag = SLJ_airforce_support }
+	# 	add_equipment_to_stockpile = {
+	# 		type = CAS_equipment_1
+	# 		amount = 50
+	# 	}
+	# }
 
 	capital_scope = {
 		create_unit = { division = "name = \"Hsin-pien 30 Shih\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.8 start_equipment_factor = 1.0" owner = ROOT }

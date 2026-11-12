@@ -44,6 +44,7 @@ SLJ_officer_corps_category = {
 		visible = {
 			has_country_flag = SLJ_path
 			NOT = { has_country_flag = SLJ_regime_established }
+			NOT = { has_country_flag = SLJ_mps_support }
 		}
 		available = {
 			has_country_flag = SLJ_path
@@ -83,6 +84,7 @@ SLJ_officer_corps_category = {
 		visible = {
 			has_country_flag = SLJ_path
 			NOT = { has_country_flag = SLJ_regime_established }
+			NOT = { has_country_flag = SLJ_airforce_support }
 		}
 		available = {
 			has_country_flag = SLJ_path
@@ -124,6 +126,7 @@ SLJ_officer_corps_category = {
 		visible = {
 			has_country_flag = SLJ_path
 			NOT = { has_country_flag = SLJ_regime_established }
+			NOT = { has_country_flag = SLJ_navy_support }
 		}
 		available = {
 			has_country_flag = SLJ_path
