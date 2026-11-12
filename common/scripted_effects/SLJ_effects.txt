@@ -28,54 +28,7 @@ SLJ_peaceful_transition_effect = {
 	country_event = { id = slj.2 }
 }
 
-# Coup: player stays as Sun's government; Chiang's loyalists break away as fascists.
-SLJ_coup_effect = {
-	
-	# Chiang becomes leader of the fascist faction, which the breakaway state inherits
-	add_country_leader_role = {
-		character = CHI_chiang_kaishek
-		country_leader = {
-			expire = "1965.1.1"
-			ideology = ultranationalism
-			traits = { army_connections }
-		}
-		promote_leader = yes	# replaces Dai Li as fascist party leader (fixed in v0.1.6)
-	}
-	SLJ_install_sun_as_leader = yes	# runs after, so Sun still ends up ruling
-
-	# Civil wars share generals out between both sides, and Sun (a general AND our new
-	# leader) went to the loyalists in testing. So: he stops being a general for the
-	# split, and gets the role back right after with his stats.
-	CHI_sun_li_jen = { set_character_flag = SLJ_loyal_to_sun }
-	remove_unit_leader_role = { character = CHI_sun_li_jen }
-
-	if = {
-		limit = { check_variable = { SLJ_branches_won > 2 } }   # all three: clean coup
-		# no start_civil_war
-		country_event = { id = slj.13 }
-	}
-	else_if = {
-		limit = { check_variable = { SLJ_branches_won > 1 } }   # two: smaller breakaway
-		start_civil_war = {
-			ideology = fascism
-			size = 0.35
-			# TODO: navy_ratio / air_ratio based on which branches you won
-		}
-		set_country_flag = SLJ_took_power_by_coup
-		add_war_support = 0.10
-		country_event = { id = slj.3 }
-	}
-	else = {                                                       # one or none: today's version
-		start_civil_war = {
-			ideology = fascism
-			size = 0.65
-		}
-		set_country_flag = SLJ_took_power_by_coup
-		add_war_support = 0.10
-		country_event = { id = slj.3 }
-	}
-
-	# Sun is a general again (R56's traits; skill as after 'A Hero of the Nation')
+SLJ_readd_sun_as_general = {
 	add_corps_commander_role = {
 		character = CHI_sun_li_jen
 		traits = { career_officer brilliant_strategist war_hero }
@@ -85,6 +38,9 @@ SLJ_coup_effect = {
 		planning_skill = 4
 		logistics_skill = 4
 	}
+}
+
+SLJ_spawn_new_army = {
 
 	# Sun's elite core, spawned AFTER the split so it isn't divided
 	division_template = {
@@ -160,4 +116,110 @@ SLJ_coup_effect = {
 		create_unit = { division = "name = \"50 Shih\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.7 start_equipment_factor = 1.0" owner = ROOT }
 		create_unit = { division = "name = \"Chiao-tao-tui\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.5 start_equipment_factor = 1.0" owner = ROOT }
 	}
+}
+
+# Coup: player stays as Sun's government; Chiang's loyalists break away as fascists.
+SLJ_coup_effect = {
+	
+	# Chiang becomes leader of the fascist faction, which the breakaway state inherits
+	add_country_leader_role = {
+		character = CHI_chiang_kaishek
+		country_leader = {
+			expire = "1965.1.1"
+			ideology = ultranationalism
+			traits = { army_connections }
+		}
+		promote_leader = yes	# replaces Dai Li as fascist party leader (fixed in v0.1.6)
+	}
+	SLJ_install_sun_as_leader = yes	# runs after, so Sun still ends up ruling
+
+	# Civil wars share generals out between both sides, and Sun (a general AND our new
+	# leader) went to the loyalists in testing. So: he stops being a general for the
+	# split, and gets the role back right after with his stats.
+	CHI_sun_li_jen = { set_character_flag = SLJ_loyal_to_sun }
+	remove_unit_leader_role = { character = CHI_sun_li_jen }
+
+	if = {
+		limit = { check_variable = { SLJ_branches_won > 2 } }   # all three: clean coup
+		# no start_civil_war
+		country_event = { id = slj.13 }
+	}
+	else_if = {
+		limit = { check_variable = { SLJ_branches_won > 1 } }   # two branches
+		if = {
+			limit = { has_country_flag = SLJ_navy_support has_country_flag = SLJ_airforce_support }
+			start_civil_war = { 
+				ideology = fascism size = 0.35 
+				navy_ratio = 0 
+				air_ratio = 0 
+				transfer_units_fraction = {
+					target = PREV
+					size = 0          # default for every ratio below...
+					navy_ratio = 1    # ...except the navy
+				}
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = SLJ_navy_support }      # navy + MPs
+			start_civil_war = { 
+				ideology = fascism 
+				size = 0.35 
+				navy_ratio = 0 
+					transfer_units_fraction = {
+					target = PREV
+					size = 0          # default for every ratio below...
+					navy_ratio = 1    # ...except the navy
+				}
+			}
+		}
+		else = {                                                 # air force + MPs
+			start_civil_war = { 
+				ideology = fascism 
+				size = 0.35 
+				air_ratio = 0 
+			}
+		}
+		set_country_flag = SLJ_took_power_by_coup
+		add_war_support = 0.10
+		SLJ_spawn_new_army = yes
+		country_event = { id = slj.3 }
+	}
+	else = {     # one or no branch
+		if = {
+			limit = { has_country_flag = SLJ_navy_support }
+			start_civil_war = {
+			ideology = fascism
+			size = 0.65
+			navy_ratio = 0
+			transfer_units_fraction = {
+				target = PREV
+				size = 0          # default for every ratio below...
+				navy_ratio = 1    # ...except the navy
+				}
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = SLJ_airforce_support }
+			start_civil_war = {
+				ideology = fascism
+				size = 0.65
+				air_ratio = 0
+			}
+		}
+		else = {
+			start_civil_war = {
+				ideology = fascism
+				size = 0.65
+			}
+		}
+		set_country_flag = SLJ_took_power_by_coup
+		add_war_support = 0.10
+		SLJ_spawn_new_army = yes
+		country_event = { id = slj.3 }
+	}
+
+	# Sun is a general again (R56's traits; skill as after 'A Hero of the Nation')
+	SLJ_readd_sun_as_general = yes
+
+	
 }

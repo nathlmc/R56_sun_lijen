@@ -1,4 +1,4 @@
-# R56: Sun Li-jen Path (v0.1.7)
+# R56: Sun Li-jen Path (v0.2.0)
 
 An alt-history branch for Nationalist China in Road to 56. If Chiang takes the secret-police route, the player can back Colonel Sun Li-jen's reformist officers instead. The branch ends in either a peaceful handover or the Nanking Coup and a civil war.
 

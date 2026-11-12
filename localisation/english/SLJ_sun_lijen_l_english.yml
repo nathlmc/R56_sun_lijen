@@ -65,6 +65,7 @@
  SLJ_mps_will_join_tt:0 "§YThe Military Police§! will side with Sun when the time comes."
  SLJ_airforce_will_join_tt:0 "§BThe Air Force§! will side with Sun when the time comes."
  SLJ_navy_will_join_tt:0 "§WThe Navy§! will side with Sun when the time comes."
+ SLJ_arrest_them_tt:0 "§RA small number of loyalists will rebel§"
 
  ### Events ###
  slj.1.t:0 "The Officers' Memorandum"
@@ -78,8 +79,9 @@
  slj.3.d:0 "At dawn, Tax Police regiments occupied the Executive Yuan, the radio station and the city gates. By noon, General Sun Li-jen had declared a Government of National Reform. Chiang Kai-shek escaped the capital, and loyalist commanders across the interior have already denounced the 'traitor of Nanking'. China is at war with itself."
  slj.3.a:0 "There is no turning back."
  slj.13.t:0 "Nanking Changes Hands Overnight"
- slj.13.d:0 "At 23:00 last night, a convoy of Military Police vehicles entered the Nanking Presidential Palace. The sentries did not even attempt to stop them. As they stopped in front of the main building, a tall, athletic figure stepped out of the middle vehicle. Surrounded by a dozen soldiers, he hurried into the building.\n\"This is treason, General Sun!\" yelled Chiang. \n\"Generalissimo, the people have spoken, I have the support of the armed forces, any further resistance would be futile!\" replied Sun coldly.\nFor years, he had seen the corruption and excesses of the Chiang regime. The day has finally come for the Republic of China to step into a new chapter."
- slj.13.a:0 "The end of the Generalissimo's rule."
+ slj.13.d:0 "At 23:00 last night, a convoy of Military Police vehicles entered the Nanking Presidential Palace. The sentries did not even attempt to stop them. As they stopped in front of the main building, a tall, athletic figure stepped out of the middle vehicle. Surrounded by a dozen soldiers, he hurried into the building.\n\"This is treason, General Sun!\" yelled Chiang. \n\"Generalissimo, the people have spoken, I have the support of the armed forces, any further resistance would be futile!\" replied Sun coldly.\nFor years, he had seen the corruption and excesses of the Chiang regime. The day has finally come for the Republic of China to step into a new chapter.\n\nThere are reports of officers who refuse to recognize the change in leadership."
+ slj.13.a:0 "Pre-emptively pardon them all"
+ slj.13.b:0 "Arrest them all!"
  slj.4.t:0 "Chinese Request for Military Advisors"
  slj.4.d:0 "A delegation of Chinese officers, led by a graduate of the Virginia Military Institute, has asked the War Department to send instructors to help modernize their army."
  slj.4.a:0 "Send the advisors."

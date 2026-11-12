@@ -46,9 +46,35 @@ country_event = {
 	desc = slj.13.d
 	is_triggered_only = yes
 	option = 
-	{ 
+	{ 	# Grant amnesty
 		name = slj.13.a 
 		retire_character = CHI_chiang_kaishek
+		add_stability = 0.05
+		add_political_power = 50
+		SLJ_spawn_new_army = yes
+	}
+	option =
+	{	# Hunt the remnants down
+		name = slj.13.b
+		set_country_flag = SLJ_took_power_by_coup	# earns the civil-war rewards
+		add_war_support = 0.10
+
+		# Same protection as in the coup: Sun stops being a general for the split
+		remove_unit_leader_role = { character = CHI_sun_li_jen }
+		start_civil_war = {
+			ideology = fascism
+			size = 0.1
+			navy_ratio = 0
+			air_ratio = 0
+			transfer_units_fraction = {
+				target = PREV
+				size = 0          # default for every ratio below...
+				navy_ratio = 1    # ...except the navy
+			}
+		}
+		SLJ_readd_sun_as_general = yes
+		SLJ_spawn_new_army = yes
+		custom_effect_tooltip = SLJ_arrest_them_tt
 	}
 }
 
