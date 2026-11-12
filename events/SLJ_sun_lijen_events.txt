@@ -124,6 +124,7 @@ country_event = {	# MPs accept
 		name = slj.8.a
 		add_stability = 0.05
 		add_war_support = 0.05
+		custom_effect_tooltip = SLJ_mps_will_join_tt
 	}
 }
 
@@ -147,6 +148,7 @@ country_event = {	# Air Force accept
 		name = slj.10.a
 		add_stability = 0.05
 		add_war_support = 0.05
+		custom_effect_tooltip = SLJ_airforce_will_join_tt
 		}
 }
 
@@ -157,7 +159,7 @@ country_event = {	# Navy reject
 	is_triggered_only = yes
 	option = {
 		name = slj.11.a
-		add_stability = -0.05
+		add_stability = -0.1
 		}
 }
 
@@ -170,5 +172,6 @@ country_event = {	# Navy accept
 		name = slj.12.a
 		add_stability = 0.05
 		add_war_support = 0.05
+		custom_effect_tooltip = SLJ_navy_will_join_tt
 		}
 }

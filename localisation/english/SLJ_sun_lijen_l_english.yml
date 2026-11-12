@@ -62,6 +62,9 @@
  SLJ_coup_warning_tt:0 "If the armed forces are divided, §Rcivil war will follow§!. The more branches back Sun, the smaller the loyalist revolt."
  SLJ_war_hero_condition_tt:0 "Sun Li-jen is a recognized war hero (§YPromote the War Hero§! taken, or his skill is above 3)"
  SLJ_american_advisors:0 "American Advisors"
+ SLJ_mps_will_join_tt:0 "§YThe Military Police§! will side with Sun when the time comes."
+ SLJ_airforce_will_join_tt:0 "§BThe Air Force§! will side with Sun when the time comes."
+ SLJ_navy_will_join_tt:0 "§WThe Navy§! will side with Sun when the time comes."
 
  ### Events ###
  slj.1.t:0 "The Officers' Memorandum"

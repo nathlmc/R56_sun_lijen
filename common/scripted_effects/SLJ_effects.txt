@@ -30,8 +30,7 @@ SLJ_peaceful_transition_effect = {
 
 # Coup: player stays as Sun's government; Chiang's loyalists break away as fascists.
 SLJ_coup_effect = {
-	set_country_flag = SLJ_took_power_by_coup
-
+	
 	# Chiang becomes leader of the fascist faction, which the breakaway state inherits
 	add_country_leader_role = {
 		character = CHI_chiang_kaishek
@@ -62,6 +61,8 @@ SLJ_coup_effect = {
 			size = 0.35
 			# TODO: navy_ratio / air_ratio based on which branches you won
 		}
+		set_country_flag = SLJ_took_power_by_coup
+		add_war_support = 0.10
 		country_event = { id = slj.3 }
 	}
 	else = {                                                       # one or none: today's version
@@ -69,6 +70,8 @@ SLJ_coup_effect = {
 			ideology = fascism
 			size = 0.65
 		}
+		set_country_flag = SLJ_took_power_by_coup
+		add_war_support = 0.10
 		country_event = { id = slj.3 }
 	}
 
@@ -136,11 +139,25 @@ SLJ_coup_effect = {
 			amount = 60
 		}
 	}
+
+	if = { limit = { has_country_flag = SLJ_navy_support }
+		add_equipment_to_stockpile = {
+			type = convoy_1
+			amount = 10
+		}
+	}
+
+	if = { limit = { has_country_flag = SLJ_airforce_support }
+		add_equipment_to_stockpile = {
+			type = CAS_equipment_1
+			amount = 50
+		}
+	}
+
 	capital_scope = {
 		create_unit = { division = "name = \"Hsin-pien 30 Shih\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.8 start_equipment_factor = 1.0" owner = ROOT }
 		create_unit = { division = "name = \"Hsin-pien 38 Shih\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.8 start_equipment_factor = 1.0" owner = ROOT }
 		create_unit = { division = "name = \"50 Shih\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.7 start_equipment_factor = 1.0" owner = ROOT }
 		create_unit = { division = "name = \"Chiao-tao-tui\" division_template = \"Hsin-i Chün\" start_experience_factor = 0.5 start_equipment_factor = 1.0" owner = ROOT }
 	}
-	add_war_support = 0.10
 }

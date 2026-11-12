@@ -98,6 +98,7 @@ SLJ_officer_corps_category = {
 					modifier = {add = 10 has_country_flag = SLJ_us_backing }
 					add_to_variable = { var = SLJ_branches_won value = 1 }
 					set_country_flag = SLJ_airforce_support
+					air_experience = 35
 					country_event = { id = slj.10 }
 				}
 				60 = {
@@ -138,6 +139,7 @@ SLJ_officer_corps_category = {
 					modifier = { add = 10 has_country_flag = SLJ_us_backing }
 					add_to_variable = { var = SLJ_branches_won value = 1 }
 					set_country_flag = SLJ_navy_support
+					navy_experience = 35
 					country_event = { id = slj.12 }
 				}
 				40 = {
